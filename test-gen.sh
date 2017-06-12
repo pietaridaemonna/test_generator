@@ -125,11 +125,11 @@ echo "--------------------------------------------------------------------------
 while getopts ":df:" optname
   do
     case "$optname" in
-      "d")
-        echo -e "using ${YELLOW}dynamic${NONE} inventory (Cobbler, CMDB, etc..)"
+      "s")
+        echo -e "creating ${YELLOW}SOFTWARE TEST${NONE}"
         ;;
-      "f")
-        echo "USING CONFIG FILE, Option $optname has value $OPTARG"
+      "c")
+        echo "creating ${YELLOW}CLOUD TEST${NONE}"
         ;;
       "?")
         fatal_error "INVALID ARGUMENT"
@@ -145,8 +145,8 @@ while getopts ":df:" optname
     esac
   done
 
-if [ $OPTIND -eq 1 ]; then echo "No options were passed";
-    run_setup
+if [ $OPTIND -eq 1 ]; then echo "No options were passed.. use either -s [Software test] or -c [Cloud test]";
+    print_options
 fi
 
 
