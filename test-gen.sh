@@ -20,8 +20,10 @@ test_results=()
 
 # DECORATORS
 
-@TASK.name('jsdflksfjsdjf')
-@TASK.expected_result('skdf')
+# @TASK.name('jsdflksfjsdjf')
+# @TASK.expected_result('skdf')
+# @TASK.actual_result('lsdkfj')
+# @TASK.run_time('time')
 
 # TEST FUNCTIONS =================================================================
 
@@ -39,8 +41,8 @@ function test_success () {
     echo -e "=================================="
 }
 
-function test_unresolved () {
-    echo -e "${YELLOW}UNRESOLVED${NONE}"
+function test_unclear () {
+    echo -e "${YELLOW}UNCLEAR${NONE}"
     echo -e "==================================${NONE}"
     echo $1
     echo -e "=================================="
