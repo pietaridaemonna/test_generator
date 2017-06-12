@@ -1,4 +1,4 @@
-# test_generator
+# test generator
 
 shell script to generate test structure
 
@@ -15,7 +15,7 @@ Unit testing refers to tests that verify the functionality of a specific section
 
 These types of tests are usually written by developers as they work on code (white-box style), to ensure that the specific function is working as expected. 
 
-Depending on the organization's expectations for software development, unit testing might include static code analysis, data-flow analysis, metrics analysis, peer code reviews, code coverage analysis and other software verification practices.
+*Depending on the organization's expectations for software development, unit testing might include static code analysis, data-flow analysis, metrics analysis, peer code reviews, code coverage analysis and other software verification practices.*
 
 #### Integration testing
 

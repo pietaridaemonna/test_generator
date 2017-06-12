@@ -13,12 +13,29 @@ CYAN='\033[36m'
 GREY='\033[37m'
 
 # VARIABLES -----------------------------------------------------------------------
-groups_index=()
-groups_name=()
-groups_id=()
+selected_tests=()
+ignored_test=()
+test_results=()
 
 
 # FUNCTIONS ======================================================================
+
+function create_test_tree () {
+    mkdir test_suite_$1
+    cd test_suite_$1
+    mkdir installation_test
+    mkdir compatibility_test
+    mkdir smoke_test
+    mkdir regression_test
+    mkdir acceptance_test
+    mkdir alpha_test
+    mkdir beta_test
+    mkdir continuous_test
+    mkdir destructive_test
+    mkdir performance_test
+    mkdir security_test
+    mkdir internationalization_test
+}
 
 function run_until () {
     re=^[a-zA-Z0-9_-]$
@@ -90,73 +107,7 @@ function group_vars_deploy {
 # MAIN SETUP
 function run_setup {
     echo "running setup...."
-    echo ""  
-    
-    echo -e "Enter ${GREEN}Project name${NONE}"
-    read PROJECT_NAME
 
-    # TODO change to while
-    run_until ${PROJECT_NAME}
-    echo -e "your project name is ${YELLOW}${PROJECT_NAME}${NONE}"   
-
-    echo "creating folder struct"
-    mkdir ${PROJECT_NAME} 
-    cd ${PROJECT_NAME} 
-
-    mkdir inventories
-    cd inventories
-    # sub inventories
-    mkdir production
-    echo "# inventory file for production servers" > production/hosts
-    mkdir production/group_vars
-    echo "# here we assign variables to particular groups" > production/group_vars/group1
-    mkdir production/host_vars
-    echo "# if systems need specific variables, put them here" > production/host_vars/hostname1
-
-
-    mkdir test
-    echo "# inventory file for production servers" > test/hosts
-    mkdir test/group_vars
-    echo "# here we assign variables to particular groups" > test/group_vars/group1
-    mkdir test/host_vars
-    echo "# if systems need specific variables, put them here" > test/host_vars/hostname1
-    
-    mkdir dev
-    echo "# inventory file for production servers" > dev/hosts
-    mkdir dev/group_vars
-    echo "# here we assign variables to particular groups" > dev/group_vars/group1
-    mkdir dev/host_vars
-    echo "# if systems need specific variables, put them here" > dev/host_vars/hostname1
-    cd ..
-
-    mkdir library
-    mkdir filter_plugins
-    mkdir roles
-    mkdir roles/web
-    mkdir roles/monitoring
-    mkdir roles/app
-    mkdir roles/db
-    mkdir roles/jump
-    mkdir roles/ntp
-
-    echo "#master playbook" > site.yml
-    echo "- include: webservers.yml" >> site.yml
-    echo "- include: dbservers.yml" >> site.yml
-    echo "- include: appservers.yml" >> site.yml
-    echo "- include: jumpservers.yml" >> site.yml
-
-
-    echo "#webservers playbook" > webservers.yml
-    echo "#dbservers playbook" > dbservers.yml
-    echo "#appservers playbook" > appservers.yml
-    echo "#jumpservers playbook" > jumpservers.yml
-
-    mkdir group_vars
-    group_vars_deploy
-    
-
-    mkdir host_vars
-    echo " # if systems need specific variables, put them here" > host_vars/host1
 
     tree
 }
@@ -165,9 +116,9 @@ function run_setup {
 # MAIN -----------------------------------------------------------------------------------------
 
 echo "---------------------------------------------------------------------------------"
-echo "ANSIBLE PROJECT GENERATOR"    
+echo "Test GENERATOR"    
 echo "---------------------------------------------------------------------------------------"
-echo "ansible project generator. https://github.com/pietaridaemonna/ansible_project_generator"
+echo "ansible project generator. https://github.com/pietaridaemonna/test_generator"
 echo "---------------------------------------------------------------------------------------"
 
 # CHECK ARGUMENTS
