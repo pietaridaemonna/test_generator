@@ -18,10 +18,40 @@ ignored_test=()
 test_results=()
 
 
+# DECORATORS
+
+@TASK.name('jsdflksfjsdjf')
+@TASK.expected_result('skdf')
+
+# TEST FUNCTIONS =================================================================
+
+function test_failure () {
+    echo -e "${RED}FAILURE${NONE}"
+    echo -e "==================================${NONE}"
+    echo $1
+    echo -e "=================================="
+}
+
+function test_success () {
+    echo -e "${GREEN}SUCCESS${NONE}"
+    echo -e "==================================${NONE}"
+    echo $1
+    echo -e "=================================="
+}
+
+function test_unresolved () {
+    echo -e "${YELLOW}UNRESOLVED${NONE}"
+    echo -e "==================================${NONE}"
+    echo $1
+    echo -e "=================================="
+}
+
+
 # FUNCTIONS ======================================================================
 
 function create_test_tree () {
     mkdir test_suite_$1
+
     cd test_suite_$1
     mkdir installation_test
     mkdir compatibility_test
@@ -37,6 +67,14 @@ function create_test_tree () {
     mkdir internationalization_test
 }
 
+function collect_CLOUD_tools () {
+    sudo apt-get install python-pip
+    pip install tox
+
+    git clone https://github.com/cisco-oss-eng/Cloud99.git
+    git clone https://github.com/openstack/rally.git
+}
+
 function run_until () {
     re=^[a-zA-Z0-9_-]$
     while [[ "$1" =~ ${re} ]]; do    #TODO match only alphanum and _
@@ -44,7 +82,7 @@ function run_until () {
     done
 }
 
-function fatal_error {
+function fatal_error () {
     echo -e "${RED}=================================="
     echo -e "FATAL ERROR${NONE}"
     echo -e "==================================${NONE}"
@@ -53,7 +91,7 @@ function fatal_error {
 }
 
 # Check if IP address is valid  
-function validate_IP {
+function validate_IP () {
         local ip=$1
 	local stat=1
 	# Check the IP address under test to see if it matches the extended REGEX
@@ -73,15 +111,15 @@ function validate_IP {
 	fi
 }
 
-function create_group {
+function create_group () {
     echo -e "creating group ${YELLOW}$1${NONE}"
 }
 
-function create_hostnames_from_file {
+function create_hostnames_from_file () {
     echo -e "creating hostnames from ${YELLOW}$1${NONE}"
 }
 
-function group_vars_deploy {
+function group_vars_deploy () {
     echo -e "Do you want to copy group_vars from local file? ${GREEN}[Y/N]${NONE}:"
     read answer
 
@@ -105,10 +143,15 @@ function group_vars_deploy {
 }
 
 # MAIN SETUP
-function run_setup {
+function run_setup () {
     echo "running setup...."
 
 
+    tree
+}
+
+
+function print_options () {
     tree
 }
 
@@ -118,18 +161,18 @@ function run_setup {
 echo "---------------------------------------------------------------------------------"
 echo "Test GENERATOR"    
 echo "---------------------------------------------------------------------------------------"
-echo "ansible project generator. https://github.com/pietaridaemonna/test_generator"
+echo "Testing area generator. https://github.com/pietaridaemonna/test_generator"
 echo "---------------------------------------------------------------------------------------"
 
 # CHECK ARGUMENTS
-while getopts ":df:" optname
+while getopts ":sc" optname
   do
     case "$optname" in
       "s")
         echo -e "creating ${YELLOW}SOFTWARE TEST${NONE}"
         ;;
       "c")
-        echo "creating ${YELLOW}CLOUD TEST${NONE}"
+        echo -e "creating ${YELLOW}CLOUD TEST${NONE}"
         ;;
       "?")
         fatal_error "INVALID ARGUMENT"
