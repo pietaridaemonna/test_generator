@@ -55,8 +55,39 @@ function create_test_tree () {
     mkdir test_suite_$1
 
     cd test_suite_$1
+    touch test_plan.suite
     mkdir tests
     cd tests
+
+    cat <<EOF
+    #!/usr/bin/env bats
+
+@test "Check if linux" {
+	run uname
+	[ $output = "Linux" ]
+}
+
+
+# check if VT-x is on CPU, egrep '^flags.*(vmx|svm)' /proc/cpuinfo
+@test "check if VT-x is on CPU" {
+	run bash -c "egrep '^flags.*(vmx|svm)' /proc/cpuinfo"
+	[ "$output" != "" ]
+}
+
+# check if VT-x is on CPU, egrep '^flags.*(vmx|svm)' /proc/cpuinfo
+@test "check if tree installed" {
+	run tree
+	[ $status -eq 0 ]
+}
+
+# check if VT-x is on CPU, egrep '^flags.*(vmx|svm)' /proc/cpuinfo
+@test "check if perl installed" {
+    skip
+	run perl -v
+	[ $status -eq 0 ]
+}
+    EOF
+
     mkdir installation_test
     mkdir compatibility_test
     mkdir smoke_test
