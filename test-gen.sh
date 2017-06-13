@@ -55,6 +55,8 @@ function create_test_tree () {
     mkdir test_suite_$1
 
     cd test_suite_$1
+    mkdir tests
+    cd tests
     mkdir installation_test
     mkdir compatibility_test
     mkdir smoke_test
@@ -67,6 +69,9 @@ function create_test_tree () {
     mkdir performance_test
     mkdir security_test
     mkdir internationalization_test
+    cd ..
+
+    mkdir DATA
 }
 
 function collect_CLOUD_tools () {
@@ -193,6 +198,8 @@ while getopts ":sc" optname
 if [ $OPTIND -eq 1 ]; then echo "No options were passed.. use either -s [Software test] or -c [Cloud test]";
     print_options
 fi
+
+create_test_tree $1
 
 
 exit $?
