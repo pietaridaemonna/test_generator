@@ -24,7 +24,7 @@ Integration testing is any type of software testing that seeks to verify the int
 Integration testing works to expose defects in the interfaces and interaction between integrated components (modules).
 
 
-#### System testing[edit]
+#### System testing
 
 System testing tests a completely integrated system to verify that the system meets its requirements. For example, a system test might involve testing a logon interface, then creating and editing an entry, plus sending or printing results, followed by summary processing or deletion (or archiving) of entries, then logoff.
 
@@ -72,16 +72,16 @@ Beta testing comes after alpha testing and can be considered a form of external 
 
 **Non-functional testing** refers to aspects of the software that may not be related to a specific function or user action, such as scalability or other performance, behavior under certain constraints, or security. Testing will determine the breaking point, the point at which extremes of scalability or performance leads to unstable execution. Non-functional requirements tend to be those that reflect the quality of the product, particularly in the context of the suitability perspective of its users.
 
-#### Continuous testing[edit]
+#### Continuous testing
 
 Continuous testing is the process of executing automated tests as part of the software delivery pipeline to obtain immediate feedback on the business risks associated with a software release candidate. Continuous testing includes the validation of both functional requirements and non-functional requirements; the scope of testing extends from validating bottom-up requirements or user stories to assessing the system requirements associated with overarching business goals.
 
-#### Destructive testing[edit]
+#### Destructive testing
 
 Destructive testing attempts to cause the software or a sub-system to fail. It verifies that the software functions properly even when it receives invalid or unexpected inputs, thereby establishing the robustness of input validation and error-management routines.  Software fault injection, in the form of fuzzing, is an example of failure testing. Various commercial non-functional testing tools are linked from the software fault injection page; there are also numerous open-source and free software tools available that perform destructive testing.
 
 
-#### Software performance testing[edit]
+#### Software performance testing
 
 **Performance testing** is generally executed to determine how a system or sub-system performs in terms of responsiveness and stability under a particular workload. It can also serve to investigate, measure, validate or verify other quality attributes of the system, such as scalability, reliability and resource usage.
 
